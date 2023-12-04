@@ -15,6 +15,7 @@ public class Window
     public uint yHeight { get; set; } 
     public string Title { get; set; } = "Ray";
 
+    private static vec3[,] screenArray = new vec3[1024,576];
 
     public Image image { get; set; }
     public Texture texture { get; set; }
@@ -27,8 +28,18 @@ public class Window
         sprite = new Sprite(texture);
         win = new RenderWindow(new SFML.Window.VideoMode(xWidth, yHeight), Title);
         win.Closed += (sender, e) => win.Close();
-        
-
+        for(int i=0;i<1024;i++){
+            for(int j=0;j<576;j++){
+                screenArray[i,j]=new vec3(0,0,0);
+                //if(i%18==0 || j%18==0){
+                //  screenArray[i,j]=new vec3(1,0,0);
+                //}
+            }
+        }
+    }
+    public void SetPixelArray(int x, int y,vec3 color)
+    {
+        screenArray[x,y]=color;
     }
     public void SetPixel(uint x, uint y,vec3 color)
     {
@@ -48,6 +59,11 @@ public class Window
     }
     public void Draw()
     {
+        for(int i=0;i<1024;i++){
+            for(int j=0;j<576;j++){
+                SetPixel((uint)(i), (uint)(j), screenArray[i,j]);
+            }
+        }
         texture = new Texture(image);
         sprite = new Sprite(texture);
         win.Draw(sprite);
