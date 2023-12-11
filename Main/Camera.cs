@@ -1,4 +1,4 @@
-namespace topDown;
+namespace topDown.Main;
 
 public class Camera
 {
