@@ -21,4 +21,21 @@ internal class ExtraMethods
         }
         return boolx;
     }
+    public static int TileFinderX(double xd)
+    {
+        int x=Convert.ToInt32(xd);        
+        x=x-448;
+        x=(int)x/18;
+
+        return x;
+        
+    }
+    public static int TileFinderY(double yd)
+    {
+        int y=Convert.ToInt32(yd);        
+        y=y-38;
+        y=(int)y/18;
+
+        return y;
+    }
 }
