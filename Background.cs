@@ -1,6 +1,8 @@
 using System;
 using SFML.Graphics;
 using SFML.Window;
+using SFML.Audio;
+
 
 namespace topDown;
 
@@ -14,14 +16,23 @@ public class Background
         fullscreenWindow.SetFramerateLimit(10);
     }
     
-    public void fullScreen()
+    public void FullScreen()
     {
         // Create the fullscreen window
-        
-       
-        fullscreenWindow.DispatchEvents();
-        fullscreenWindow.Clear(Color.Blue);
-        fullscreenWindow.Display();
+        var music = new Music("C:\\Users\\lukar\\Source\\Repos\\topDown\\1.wav");
+        music.Loop = true;
+        music.Play();
+
+        while (Program.running)
+        {
+            fullscreenWindow.DispatchEvents();
+            fullscreenWindow.Clear(Color.Blue);
+            fullscreenWindow.Display();
+        }
+        if (!Program.running)
+        {
+            music.Stop();
+        }
         
     }
 }
